@@ -1,24 +1,36 @@
-#include <stdio.h>
+// Guessing:
+// a - $s0
+// b - $s1
+// i - $t0
+// j - $t1
+// adress[D] - $s2
 
-int main(){
+// C code:
+// for(i = 0; i < a; i++)
+//    for(j = 0; j < b; j++)
+// 	    D[4*j] = i + j;
 
-    int A; // $s1
-    int B = 0; // $s2
-    int I = 10; // $t1
-    int temp = 0; // $t2
+add $t0, $zero, $zero // i = 0
+add $t1, $zero, $zero // j = 0
 
-    while (1){
-        if (0 < I){
-            temp = 1;
-        }
-        else temp = 0;
-        if (temp == 0) break;
-        I--;
-        B += 2;
-        printf("%d\n", I);
-    }
+loop_one:
+slt $t2, $t0, $s0 // $t2 = 1 if i < a
+beq $t2, $zero, EXIT_I // if $t2 = 0 go to EXIT_I
 
-    printf("%d", B);
+loop_two:
+slt $t2, $t1, $s1 // $t2 = 1 if j < b
+beq $t2, $zero, EXIT_J // if $t2 = 0 go to EXIT_J
+li $t3, 4 // $t3 = 4
+mul $t3, $t3, $t1 // $t3 = 4*j
+add $t3, $t3, $s2 // $t3 = 4*j + end[D]
+add $t4, $t0, $t1 // $t4 = i + j
+sw $t4, 0 ($t3) // D[4*j] = i + j
+addi $t1, $t1, 1
+j loop_two
 
-    return 0;
-}
+EXIT_J:
+addi $t0, $t0, 1
+j loop_one
+
+EXIT_I:
+...
