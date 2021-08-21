@@ -18,7 +18,7 @@ $a3 - d
 
 main:
 ...
-(código principal)
+(main code)
 ...
 
 jal f
