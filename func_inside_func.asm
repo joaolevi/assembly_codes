@@ -1,3 +1,7 @@
+/*
+
+C code:
+
 int f(int a, int b, int c, int d){
     return func(func(a, b), c + d);
 }
@@ -10,6 +14,7 @@ $a0 - a
 $a1 - b
 $a2 - c
 $a3 - d
+*/
 
 main:
 ...
