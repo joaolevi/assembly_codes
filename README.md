@@ -8,8 +8,8 @@ At the beginning of the code you will find the names of the records:
 
     a - $s0
     b - $s1
-     i - $t0
-     j - $t1
+    i - $t0
+    j - $t1
     end[D] - $s2
 
 below, the code in C:
